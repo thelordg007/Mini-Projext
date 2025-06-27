@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodiee - AI Emotional Support Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>Moodiee</h1>
+                <span class="badge">AI Therapist</span>
+            </div>
+            <div class="header-controls">
+                <button class="btn" id="theme-toggle" title="Toggle Theme">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+                <button class="btn btn-danger" id="emergency-btn" title="Emergency Resources">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" data-section="chat">Chat</button>
+            <button class="nav-btn" data-section="mood">Mood Tracker</button>
+            <button class="nav-btn" data-section="breathing">Breathing</button>
+            <button class="nav-btn" data-section="sleep">Sleep Tracker</button>
+            <button class="nav-btn" data-section="resources">Resources</button>
+        </nav>
+
+        <!-- Chat Section -->
+        <section class="section active" id="chat">
+            <div class="chat-grid">
+                <div class="card">
+                    <div class="avatar-container">
+                        <div class="avatar" id="avatar">
+                            <div class="avatar-face">
+                                <div class="eye"></div>
+                                <div class="eye"></div>
+                                <div class="mouth" id="avatar-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 style="text-align: center;">EmoBot</h2>
+                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 1rem;">Your AI emotional support companion</p>
+                    <div class="avatar-controls">
+                        <button class="btn-sm" id="wave-btn">Wave</button>
+                        <button class="btn-sm" id="dance-btn">Dance</button>
+                    </div>
+                    <div class="mood-slider-container">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">How are you feeling?</label>
+                        <input type="range" min="1" max="10" value="5" class="mood-slider" id="mood-slider">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-gray); margin-top: 0.25rem;">
+                            <span>Sad</span>
+                            <span>Happy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Chat with EmoBot</h2>
+                    <div class="chat-container" id="chat-container">
+                        <div class="message">
+                            <div class="message-bubble">
+                                Hi there! I'm EmoBot, your AI emotional support companion. How can I help you today? 😊
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="user-input" placeholder="Type your message here..." maxlength="500">
+                        <button class="send-btn" id="send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mood Tracker Section -->
+        <section class="section" id="mood">
+            <div class="card">
+                <h2>Daily Mood Tracker</h2>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">Track your daily mood to identify patterns and improve your mental health.</p>
+                
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">How are you feeling today?</label>
+                    <input type="range" min="1" max="10" value="5" class="mood-slider" id="daily-mood-slider">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-gray); margin-top: 0.25rem;">
+                        <span>Very Sad</span>
+                        <span>Neutral</span>
+                        <span>Very Happy</span>
+                    </div>
+                    <button class="btn-sm" id="save-mood" style="margin-top: 1rem; width: 100%;">Save Today's Mood</button>
+                </div>
+
+                <h3 style="margin-bottom: 1rem;">This Week</h3>
+                <div class="mood-history" id="mood-history">
+                    <!-- Mood history will be populated by JavaScript -->
+                </div>
+
+                <div class="stat-card" style="margin-top: 1rem; background: var(--bg-white);">
+                    <div class="stat-number" id="avg-mood">7.2</div>
+                    <div class="stat-label">Average Mood This Week</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breathing Exercise Section -->
+        <section class="section" id="breathing">
+            <div class="card">
+                <h2>Breathing Exercises</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">Practice deep breathing to reduce stress and anxiety. Follow the circle's rhythm.</p>
+                
+                <div class="breathing-circle" id="breathing-circle">
+                    <span id="breathing-text">Ready?</span>
+                </div>
+                
+                <div class="breathing-controls">
+                    <button class="btn-sm" id="start-breathing">Start Exercise</button>
+                    <button class="btn-sm" id="stop-breathing">Stop</button>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; margin-top: 2rem;">
+                    <h3 style="margin-bottom: 0.5rem;">Breathing Techniques</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>4-7-8 Technique:</strong> Inhale for 4, hold for 7, exhale for 8
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>Box Breathing:</strong> Inhale for 4, hold for 4, exhale for 4, hold for 4
+                        </li>
+                        <li style="padding: 0.5rem 0;">
+                            <strong>Simple Deep Breathing:</strong> Slow, deep breaths focusing on your diaphragm
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sleep Tracker Section -->
+        <section class="section" id="sleep">
+            <div class="card">
+                <h2>Sleep Tracker</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">Monitor your sleep patterns to improve your rest and mental health.</p>
+                
+                <div class="sleep-input">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Bedtime</label>
+                        <input type="time" id="bedtime" value="22:00">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Wake Time</label>
+                        <input type="time" id="waketime" value="07:00">
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Sleep Quality (1-10)</label>
+                    <input type="range" min="1" max="10" value="7" class="mood-slider" id="sleep-quality">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-gray); margin-top: 0.25rem;">
+                        <span>Poor</span>
+                        <span>Excellent</span>
+                    </div>
+                </div>
+                
+                <button class="btn-sm" id="save-sleep" style="width: 100%; margin-bottom: 2rem;">Save Sleep Data</button>
+                
+                <div class="sleep-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="avg-sleep">7.5</div>
+                        <div class="stat-label">Avg Hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="sleep-score">8.2</div>
+                        <div class="stat-label">Sleep Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="sleep-streak">5</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; margin-top: 2rem;">
+                    <h3 style="margin-bottom: 0.5rem;">Sleep Tips</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0;">• Maintain a consistent sleep schedule</li>
+                        <li style="padding: 0.5rem 0;">• Create a relaxing bedtime routine</li>
+                        <li style="padding: 0.5rem 0;">• Avoid screens 1 hour before bed</li>
+                        <li style="padding: 0.5rem 0;">• Keep your bedroom cool and dark</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="section" id="resources">
+            <div class="card">
+                <h2>Mental Health Resources</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">Professional help and support resources when you need them.</p>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--danger);">
+                        <h3 style="color: var(--danger); margin-bottom: 0.5rem;">Crisis Support</h3>
+                        <p><strong>National Suicide Prevention Lifeline:</strong> 988</p>
+                        <p><strong>Crisis Text Line:</strong> Text HOME to 741741</p>
+                        <p><strong>International:</strong> befrienders.org</p>
+                    </div>
+                    
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Professional Help</h3>
+                        <p><strong>Find a Therapist:</strong> psychologytoday.com</p>
+                        <p><strong>Online Therapy:</strong> betterhelp.com, talkspace.com</p>
+                        <p><strong>Mental Health Apps:</strong> Headspace, Calm, Mindfulness</p>
+                    </div>
+                    
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid var(--success);">
+                        <h3 style="color: var(--success); margin-bottom: 0.5rem;">Self-Care Resources</h3>
+                        <p><strong>Meditation:</strong> Insight Timer, Ten Percent Happier</p>
+                        <p><strong>Exercise:</strong> Nike Training, Fitbit Coach</p>
+                        <p><strong>Sleep:</strong> Sleep Cycle, Sleepio</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1rem; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 0.5rem; color: white; text-align: center;">
+                    <h3>Remember</h3>
+                    <p>You're not alone. It's okay to ask for help. Your mental health matters.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // State management
+        const state = {
+            currentSection: 'chat',
+            theme: 'light',
+            breathingActive: false,
+            moodHistory: [],
+            sleepData: [],
+            chatMessages: []
+        };
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            initializeNavigation();
+            initializeChat();
+            initializeMoodTracker();
+            initializeBreathing();
+            initializeSleepTracker();
+            initializeEmergency();
+            loadData();
+        });
+
+        // Theme management
+        function initializeTheme() {
+            const savedTheme = getData('theme') || 'light';
+            state.theme = savedTheme;
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            document.getElementById('theme-toggle').addEventListener('click', () => {
+                state.theme = state.theme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', state.theme);
+                saveData('theme', state.theme);
+            });
+        }
+
+        // Navigation
+        function initializeNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const sectionName = btn.getAttribute('data-section');
+                    showSection(sectionName);
+                    
+                    navButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        }
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            state.currentSection = sectionName;
+        }
+
+        // Chat functionality
+        function initializeChat() {
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatContainer = document.getElementById('chat-container');
+            const avatar = document.getElementById('avatar');
+            const avatarMouth = document.getElementById('avatar-mouth');
+            const moodSlider = document.getElementById('mood-slider');
+
+            // Avatar controls
+            document.getElementById('wave-btn').addEventListener('click', () => {
+                avatar.classList.add('wave');
+                setTimeout(() => avatar.classList.remove('wave'), 1000);
+            });
+
+            document.getElementById('dance-btn').addEventListener('click', () => {
+                avatar.classList.add('bounce');
+                setTimeout(() => avatar.classList.remove('bounce'), 4000);
+            });
+
+            // Mood slider
+            moodSlider.addEventListener('input', (e
